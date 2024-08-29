@@ -27,6 +27,7 @@ def get_args_parser():
     parser.add_argument("--lr", type=float, default=0.01)
     parser.add_argument("--niter", type=int, default=300)
     parser.add_argument("--focal_avg", action="store_true")
+    parser.add_argument("--focal", type=float, default=None)
     # parser.add_argument("--focal_avg", type=bool, default=True)
 
     parser.add_argument("--llffhold", type=int, default=2)
@@ -73,7 +74,7 @@ if __name__ == '__main__':
     os.makedirs(output_colmap_path, exist_ok=True)
 
     scene = global_aligner(output, device=args.device, mode=GlobalAlignerMode.PointCloudOptimizer)
-    loss = compute_global_alignment(scene=scene, init="mst", niter=niter, schedule=schedule, lr=lr, focal_avg=args.focal_avg)
+    loss = compute_global_alignment(scene=scene, init="mst", niter=niter, schedule=schedule, lr=lr, focal_avg=args.focal_avg, known_focal=args.focal)
     scene = scene.clean_pointcloud()
 
     imgs = to_numpy(scene.imgs)

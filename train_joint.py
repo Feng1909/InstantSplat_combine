@@ -54,10 +54,19 @@ def save_pose(path, quat_pose, train_cams, llffhold=2):
 
 
 def training(dataset, opt, pipe, testing_iterations, saving_iterations, checkpoint_iterations, checkpoint, debug_from, args):
+    # print("dataset: ", dataset)
+    # print("opt: ", opt)
+    # print("pipe: ", pipe)
+    # print("testing_iterations: ", testing_iterations)
+    # print("saving_iterations: ", saving_iterations)
+    # print("checkpoint_iterations: ", checkpoint_iterations)
+    # print("checkpoint: ", checkpoint)
+    # print("debug_from: ", debug_from)
+    # print("args: ", args)
     first_iter = 0
     tb_writer = prepare_output_and_logger(dataset)
     gaussians = GaussianModel(dataset.sh_degree)
-    scene = Scene(dataset, gaussians, opt=args, shuffle=True)                                                                      
+    scene = Scene(dataset, gaussians, opt=args, shuffle=True)
     gaussians.training_setup(opt)
     if checkpoint:
         (model_params, first_iter) = torch.load(checkpoint)

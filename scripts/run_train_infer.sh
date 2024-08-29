@@ -27,16 +27,17 @@ SCENES=(
 N_VIEWS=(
     # 3
     # 5
-    9
+    # 9
     # 10
     # 12
     # 14
+    17
     # 20
     # 24
     )
 
 # increase iteration to get better metrics (e.g. gs_train_iter=5000)
-gs_train_iter=1000
+gs_train_iter=5000
 pose_lr=1x
 
 for DATASET in "${DATASETS[@]}"; do
@@ -52,6 +53,7 @@ for DATASET in "${DATASETS[@]}"; do
             --img_base_path ${SOURCE_PATH} \
             --n_views ${N_VIEW}  \
             --focal_avg \
+            --focal 351.6702 \
             "
 
             # # ----- (2) Train: jointly optimize pose -----
@@ -76,8 +78,8 @@ for DATASET in "${DATASETS[@]}"; do
             "
 
 
-            echo "========= ${SCENE}: Dust3r_coarse_geometric_initialization ========="
-            eval $CMD_D1
+            # echo "========= ${SCENE}: Dust3r_coarse_geometric_initialization ========="
+            # eval $CMD_D1
             echo "========= ${SCENE}: Train: jointly optimize pose ========="
             eval $CMD_T
             echo "========= ${SCENE}: Render interpolated pose & output video ========="
