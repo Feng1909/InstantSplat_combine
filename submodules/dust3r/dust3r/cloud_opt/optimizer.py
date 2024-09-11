@@ -195,7 +195,7 @@ class PointCloudOptimizer(BasePCOptimizer):
         aligned_pred_j = geotrf(pw_poses, pw_adapt * self._stacked_pred_j)
 
         # compute the less
-        li = self.dist(proj_pts3d[self._ei], aligned_pred_i, weight=self._weight_i).sum() / self.total_area_i
+        li = self.dist(proj_pts3d[self._ei], aligned_pred_i[:, ::1, :], weight=self._weight_i).sum() / self.total_area_i
         lj = self.dist(proj_pts3d[self._ej], aligned_pred_j, weight=self._weight_j).sum() / self.total_area_j
 
         return li + lj

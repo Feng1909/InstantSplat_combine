@@ -68,7 +68,7 @@ if __name__ == '__main__':
 
     start_time = time.time()
     ##########################################################################################################################################################################################
-    pairs = make_pairs(images, scene_graph='complete', prefilter=None, symmetrize=True)
+    pairs = make_pairs(images, scene_graph='swin', prefilter=None, symmetrize=True)
     output = inference(pairs, model, args.device, batch_size=batch_size)
     output_colmap_path=img_folder_path.replace("images", "sparse/0")
     os.makedirs(output_colmap_path, exist_ok=True)

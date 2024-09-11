@@ -429,6 +429,11 @@ class GaussianModel:
         for group in self.optimizer.param_groups:
             stored_state = self.optimizer.state.get(group['params'][0], None)
             if stored_state is not None:
+                # print(mask)
+                # print(mask.shape)
+                # print(stored_state["exp_avg"].shape)
+                if len(mask) != stored_state["exp_avg"].shape[0]:
+                    continue
                 stored_state["exp_avg"] = stored_state["exp_avg"][mask]
                 stored_state["exp_avg_sq"] = stored_state["exp_avg_sq"][mask]
 

@@ -32,12 +32,13 @@ N_VIEWS=(
     # 12
     # 14
     17
+    # 168
     # 20
     # 24
     )
 
 # increase iteration to get better metrics (e.g. gs_train_iter=5000)
-gs_train_iter=5000
+gs_train_iter=10
 pose_lr=1x
 
 for DATASET in "${DATASETS[@]}"; do
@@ -58,7 +59,7 @@ for DATASET in "${DATASETS[@]}"; do
 
             # # ----- (2) Train: jointly optimize pose -----
             CMD_T="CUDA_VISIBLE_DEVICES=${GPU_ID} python -W ignore ./train_joint.py \
-            -s ${SOURCE_PATH} \
+            -s /home/yugrp01/dataset/folder_1_2 \
             -m ${MODEL_PATH}  \
             --n_views ${N_VIEW}  \
             --scene ${SCENE} \
@@ -68,7 +69,7 @@ for DATASET in "${DATASETS[@]}"; do
 
             # ----- (3) Render interpolated pose & output video -----
             CMD_RI="CUDA_VISIBLE_DEVICES=${GPU_ID} python -W ignore ./render_by_interp.py \
-            -s ${SOURCE_PATH} \
+            -s /home/yugrp01/dataset/folder_all \
             -m ${MODEL_PATH}  \
             --n_views ${N_VIEW}  \
             --scene ${SCENE} \

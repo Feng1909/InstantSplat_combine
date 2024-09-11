@@ -32,7 +32,7 @@ def save_interpolate_pose(model_path, iter, n_views):
 
     org_pose = np.load(model_path + f"pose/pose_{iter}.npy")
     visualizer(org_pose, ["green" for _ in org_pose], model_path + "pose/poses_optimized.png")
-    n_interp = int(10 * 30 / n_views)  # 10second, fps=30
+    n_interp = int(5)  # 10second, fps=30
     all_inter_pose = []
     for i in range(n_views-1):
         tmp_inter_pose = generate_interpolated_path(poses=org_pose[i:i+2], n_interp=n_interp)
